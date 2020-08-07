@@ -33,14 +33,15 @@ export default {
       Firebase
         .auth()
         .signInWithEmailAndPassword(this.usuario, this.password)
-        .then(function (response) {
-          console.log(response);
-        }).catch(function (error) {
-        console.log(error);
-        var errorCode = error.code;
-          var errorMessage = error.message;
-
-      });
+        .then( (response) => {
+          this.$router.push({ name: 'home', });
+          this.$toast.success({title: 'Existo', message: 'Logueado con existo',});
+        })
+        .catch( (error) => {
+          let errorCode = error.code;
+          let errorMessage = error.message;
+          this.$toast.error({title: 'Error ' + errorCode, message: errorMessage,});
+        });
     }
   }
 }

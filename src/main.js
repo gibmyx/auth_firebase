@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from "./routes";
+
 import wysiwyg from "vue-wysiwyg";
 import CxltToastr from 'cxlt-vue2-toastr';
 import VueResource from 'vue-resource';
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 import firebase from "firebase";
 
 const toastrConfigs = {
@@ -42,8 +43,11 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
-new Vue({
-  el: '#app',
-  router,
-  render: h => h(App)
-})
+firebase.auth().onAuthStateChanged(function (user){
+  new Vue({
+    el: '#app',
+    router,
+    render: h => h(App)
+  })
+});
+
